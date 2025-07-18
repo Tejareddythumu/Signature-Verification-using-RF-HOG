@@ -85,6 +85,9 @@ Open your browser and go to:
 http://127.0.0.1:5000
 
 Upload a test signature image and check the result!
-
-
+## 📊 Results & Metrics
+📂 You can find detailed output files here:
+- 📊 [BHSig-H Confusion Matrix](results/BHSig-H_confusion_matrix.txt)
+- 📈 [BHSig-B Accuracy Report](results/BHSig-B_accuracy_report.txt)
+- 📄 [Evaluation Summary](results/evaluation_summary.txt)
 
