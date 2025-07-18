@@ -44,6 +44,11 @@ This project was built as part of my academic final year work. It focuses on det
 ├── Model/
 │   ├── signature_verification_model_test.pkl
 │   └── scaler_test.pkl
+├── results/
+│   ├── results_bengali_1.txt       
+│   ├── results_cedar.txt
+│   ├── results_hindi.txt               
+│   ├── results_mine.txt                 
 ├── Templates/
 │   └── index.html                 # HTML frontend for Flask app
 ├── requirements.txt
