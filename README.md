@@ -14,8 +14,7 @@
 - [📁 Folder Structure](#-folder-structure)
 - [⚙️ Technologies Used](#️-technologies-used)
 - [🚀 How to Run the Project](#-how-to-run-the-project)
-- [📊 Results & Metrics](#-results--metrics)
-- [🧪 Ablation Study](#-ablation-study)
+- [📊 Results & Evaluation](#-results--evaluation)
 - [📂 Dataset Info](#-dataset-info)
 - [🙋‍♂️ Author](#-author)
 - [📄 License](#-license)
@@ -90,9 +89,16 @@ Open your browser and go to:
 http://127.0.0.1:5000
 
 Upload a test signature image and check the result!
-## 📊 Results & Metrics
-📂 You can find detailed output files here:
-- 📊 [BHSig-H Confusion Matrix](results/BHSig-H_confusion_matrix.txt)
-- 📈 [BHSig-B Accuracy Report](results/BHSig-B_accuracy_report.txt)
-- 📄 [Evaluation Summary](results/evaluation_summary.txt)
 
+## 📊 Results & Evaluation
+
+- 📁 [`results/`](./results): Contains `.txt` files showing detailed classification results, evaluation metrics, and summaries.
+- 📁 [`confusion matrix images/`](./confusion%20matrix%20images): Includes confusion matrices visualized as images for both training and testing phases.
+## 📂 Dataset Info
+This project uses offline signature datasets:
+
+- **BHSig-B** (Bengali)  
+- **BHSig-H** (Hindi)  
+- **CEDAR**
+
+🔗 [Click here to access dataset links](./Dataset/link.txt)
