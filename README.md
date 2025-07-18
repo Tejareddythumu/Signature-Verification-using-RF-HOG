@@ -16,7 +16,7 @@
 - [🚀 How to Run the Project](#-how-to-run-the-project)
 - [📊 Results & Evaluation](#-results--evaluation)
 - [📂 Dataset Info](#-dataset-info)
-- [🙋‍♂️ Author](#-author)
+- [📬 Contact](#-contact)
 - [📄 License](#-license)
 
 ---
@@ -40,6 +40,11 @@ This project was built as part of my academic final year work. It focuses on det
 │   └── utils.py                    # HOG feature extraction & utilities
 ├── Dataset/
 │   └── link.txt                   # Download links for datasets
+├── confusion matrix images/
+│   ├── cm_cedar.png       
+│   ├── confusion_matrix_bengali.png
+│   ├── confusion_matrix_custom.png               
+│   ├── confusion_matrix_hindi.png                
 ├── Model/
 │   ├── signature_verification_model_test.pkl
 │   └── scaler_test.pkl
@@ -102,3 +107,17 @@ This project uses offline signature datasets:
 - **CEDAR**
 
 🔗 [Click here to access dataset links](./Dataset/LINK.txt)
+
+## 📬 Contact
+
+Feel free to connect with me for any doubts or collaboration ideas!
+
+- 👤 **Venkata Teja Reddy Thumu**  
+- 📧 [Email](mailto:tejareddythumu18@gmail.com)  
+- 🔗 [GitHub](https://github.com/Tejareddythumu)  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/teja-reddy-thumu-211416293/)
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).  
+Feel free to use, modify, and distribute it with attribution.
