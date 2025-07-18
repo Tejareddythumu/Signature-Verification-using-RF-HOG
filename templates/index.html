@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signature Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #0b1a2d; /* dark blue base */
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 40% 60%, #fff, transparent),
+    radial-gradient(1.7px 1.7px at 80% 20%, #fff, transparent),
+    radial-gradient(2.5px 2.5px at 50% 50%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 70% 80%, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+
+    .container {
+      background: #fff;
+      padding: 40px 45px;
+      border-radius: 25px;
+      box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.05),
+        0 8px 30px rgba(0, 0, 0, 0.1);
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.1),
+        0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.3rem;
+      color: #304ffe;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 14px 15px;
+      border: 2px solid #d0d5ff;
+      border-radius: 12px;
+      background-color: #f7f9ff;
+      font-size: 14px;
+      color: #444;
+      transition: border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    input[type="file"]:focus,
+    input[type="file"]:hover {
+      border-color: #304ffe;
+      outline: none;
+    }
+
+    .preview {
+      margin-top: 12px;
+      max-width: 100%;
+      max-height: 140px;
+      border-radius: 12px;
+      border: 1.5px solid #ccc;
+      object-fit: contain;
+      box-shadow: 0 2px 8px rgba(48, 79, 254, 0.2);
+    }
+
+    button {
+      margin-top: 35px;
+      width: 100%;
+      padding: 14px 0;
+      background: linear-gradient(90deg, #304ffe, #67e8f9);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(48, 79, 254, 0.5);
+      transition: background 0.4s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #1a3bc4, #40c3ff);
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #1b5e20; /* Dark green */
+      min-height: 24px;
+      transition: color 0.3s ease;
+    }
+
+    #result.error {
+      color: #d32f2f; /* Red */
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="pageTitle">
+    <h1 id="pageTitle">Signature Verification</h1>
+    <form id="uploadForm" aria-describedby="result">
+      <label for="image1">Upload Genuine Signature Image</label>
+      <input type="file" id="image1" name="image1" accept="image/*" required aria-required="true" />
+      <img id="preview1" class="preview" alt="Preview Genuine Signature" style="display:none;" />
+
+      <label for="image2">Upload Signature to Verify</label>
+      <input type="file" id="image2" name="image2" accept="image/*" required aria-required="true" />
+      <img id="preview2" class="preview" alt="Preview Signature to Verify" style="display:none;" />
+
+      <button type="submit" aria-live="polite">Verify Signature</button>
+    </form>
+    <div id="result" aria-live="polite"></div>
+  </div>
+
+  <script>
+    const previewImage = (inputElem, previewElem) => {
+      const file = inputElem.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          previewElem.src = e.target.result;
+          previewElem.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewElem.src = '';
+        previewElem.style.display = 'none';
+      }
+    };
+
+    const image1Input = document.getElementById('image1');
+    const image2Input = document.getElementById('image2');
+    const preview1 = document.getElementById('preview1');
+    const preview2 = document.getElementById('preview2');
+
+    image1Input.addEventListener('change', () => previewImage(image1Input, preview1));
+    image2Input.addEventListener('change', () => previewImage(image2Input, preview2));
+
+    document.getElementById('uploadForm').onsubmit = async function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = "Verifying...";
+      resultDiv.classList.remove('error');
+
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        resultDiv.textContent = "Result: " + result.result;
+      } catch (error) {
+        console.error('Error:', error);
+        resultDiv.textContent = "Error occurred during prediction.";
+        resultDiv.classList.add('error');
+      }
+    };
+  </script>
+</body>
+</html>
